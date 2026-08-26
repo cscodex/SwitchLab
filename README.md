@@ -14,11 +14,13 @@ Play the guided lesson, send presets (`PC-A → PC-B`, reply, silent host, broad
 ## Run locally
 
 ```bash
+git clone https://github.com/cscodex/SwitchLab.git
+cd SwitchLab
 npm install
 npm run dev
 ```
 
-Open the URL Vite prints (typically port 8080).
+Then open http://localhost:8080
 
 ## Stack
 
