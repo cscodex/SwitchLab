@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --color-bg: #f3f2ee;
+  --color-surface: #ffffff;
+  --color-elevated: #eceae4;
+  --color-fg: #1c1b18;
+  --color-muted: #5b5e66;
+  --color-subtle: #8b8e96;
+  --color-border: #d4d1c9;
+  --color-accent: #3a5366;
+  --color-accent-fg: #f3f2ee;
+  --color-ring: #3a5366;
+  --color-cable: #5d817c;
+  --color-cable-on: #1f7a6e;
+  --color-unicast: #1f7a6e;
+  --color-flood: #b56e28;
+  --color-drop: #b5534c;
+  --color-learn: #8a6d1e;
+  --color-link: #2f7a48;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-border:
+    0 0 0 1px rgb(28 27 24 / 0.08),
+    0 1px 2px -1px rgb(28 27 24 / 0.06),
+    0 2px 4px 0 rgb(28 27 24 / 0.04);
+  --shadow-border-hover:
+    0 0 0 1px rgb(28 27 24 / 0.12),
+    0 1px 2px -1px rgb(28 27 24 / 0.08),
+    0 2px 4px 0 rgb(28 27 24 / 0.06);
+
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flash-learn {
+  0% {
+    background-color: color-mix(in oklab, var(--color-learn) 18%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes flash-hit {
+  0% {
+    background-color: color-mix(in oklab, var(--color-unicast) 16%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes led-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes packet-glow {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.mac-row-in {
+  animation: row-in 400ms var(--ease-smooth-out) both;
+}
+
+.mac-flash-learn {
+  animation: flash-learn 900ms var(--ease-out) both;
+}
+
+.mac-flash-hit,
+.mac-flash-update {
+  animation: flash-hit 900ms var(--ease-out) both;
+}
+
+.led-busy {
+  animation: led-pulse 700ms ease-in-out infinite;
+}
+
+.packet-glow {
+  animation: packet-glow 900ms ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mac-row-in,
+  .mac-flash-learn,
+  .mac-flash-hit,
+  .mac-flash-update,
+  .led-busy,
+  .packet-glow {
+    animation: none;
+  }
+}
